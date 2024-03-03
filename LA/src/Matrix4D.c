@@ -691,17 +691,17 @@ void __cdecl mat4_set_rotate_axis(pmat4 m, float x, float y, float z, float rad)
 	const float fsu = 1.f - c;
 
     m->x_basis.x = x * x * fsu + c;
-    m->x_basis.y = x * y * fsu - z * s;
+    m->x_basis.y = -x * y * fsu + z * s;
     m->x_basis.z = x * z * fsu + y * s;
     m->x_basis.w = 0.f;
 
-    m->y_basis.x = x * y * fsu + z * s;
+    m->y_basis.x = -x * y * fsu - z * s;
     m->y_basis.y = y * y * fsu + c;
-    m->y_basis.z = y * z * fsu - x * s;
+    m->y_basis.z = -y * z * fsu + x * s;
     m->y_basis.w = 0.f;
 
     m->z_basis.x = x * z * fsu - y * s;
-    m->z_basis.y = y * z * fsu + x * s;
+    m->z_basis.y = -y * z * fsu - x * s;
     m->z_basis.z = z * z * fsu + c;
     m->z_basis.w = 0.f;
 
@@ -709,30 +709,6 @@ void __cdecl mat4_set_rotate_axis(pmat4 m, float x, float y, float z, float rad)
     m->w_basis.y = 0.f;
     m->w_basis.z = 0.f;
     m->w_basis.w = 1.f;
-
-    // const float c = cosf(rad);
-    // const float s = sinf(rad);
-    // const float t = 1.0f - c;
-
-    // m->x_basis.x = c + x * x * t;
-    // m->x_basis.y = y * x * t - z * s;
-    // m->x_basis.z = z * x * t + y * s;
-    // m->x_basis.w = 0.f;
-
-    // m->y_basis.x = x * y * t + z * s;
-    // m->y_basis.y = c + y * y * t;
-    // m->y_basis.z = z * y * t - x * s;
-    // m->y_basis.w = 0.f;
-
-    // m->z_basis.x = x * z * t - y * s;
-    // m->z_basis.y = y * z * t + x * s;
-    // m->z_basis.z = c + z * z * t;
-    // m->z_basis.w = 0.f;
-
-    // m->w_basis.x = 0.f;
-    // m->w_basis.y = 0.f;
-    // m->w_basis.z = 0.f;
-    // m->w_basis.w = 1.f;
 }
 
 void __cdecl mat4_set_rotate_axis_degrees(pmat4 m, float x, float y, float z, float degrees)
@@ -805,14 +781,14 @@ void __cdecl mat4_set_rotate_around_point(pmat4 m, cpvec3 axis, cpvec3 point, fl
 	const float fsu = 1.f - cs;
 
     const float a = axis->x * axis->x * fsu + cs;
-    const float b = axis->x * axis->y * fsu + axis->z * sn;
-    const float c = axis->x * axis->z * fsu - axis->y * sn;
+    const float b = -axis->x * axis->y * fsu + axis->z * sn;
+    const float c = axis->x * axis->z * fsu + axis->y * sn;
 
-    const float d = axis->x * axis->y * fsu - axis->z * sn;
+    const float d = -axis->x * axis->y * fsu - axis->z * sn;
     const float e = axis->y * axis->y * fsu + cs;
-    const float f = axis->y * axis->z * fsu + axis->x * sn;
+    const float f = -axis->y * axis->z * fsu + axis->x * sn;
 
-    const float g = axis->x * axis->z * fsu + axis->y * sn;
+    const float g = axis->x * axis->z * fsu - axis->y * sn;
     const float h = axis->y * axis->z * fsu - axis->x * sn;
     const float i = axis->z * axis->z * fsu + cs;
 
@@ -833,6 +809,15 @@ int __cdecl mat4_is_equal(cpmat4 m1, cpmat4 m2)
         vec4_is_equal(&m1->y_basis, &m2->y_basis) &&
         vec4_is_equal(&m1->z_basis, &m2->z_basis) &&
         vec4_is_equal(&m1->w_basis, &m2->w_basis);
+}
+
+void __cdecl mat4_output(cpmat4 m)
+{
+    if (!m) return;
+    printf("|%.6f\t%.6f\t%.6f\t%.6f\t|\n", m->x_basis.x, m->x_basis.y, m->x_basis.z, m->x_basis.w);
+    printf("|%.6f\t%.6f\t%.6f\t%.6f\t|\n", m->y_basis.x, m->y_basis.y, m->y_basis.z, m->y_basis.w);
+    printf("|%.6f\t%.6f\t%.6f\t%.6f\t|\n", m->z_basis.x, m->z_basis.y, m->z_basis.z, m->z_basis.w);
+    printf("|%.6f\t%.6f\t%.6f\t%.6f\t|\n", m->w_basis.x, m->w_basis.y, m->w_basis.z, m->w_basis.w);
 }
 
 #ifdef __cplusplus

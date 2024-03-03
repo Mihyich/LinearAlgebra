@@ -267,6 +267,13 @@ int __cdecl mat2_is_equal(cpmat2 m1, cpmat2 m2)
         vec2_is_equal(&m1->y_basis, &m2->y_basis);
 }
 
+void __cdecl mat2_output(cpmat2 m)
+{
+    if (!m) return;
+    printf("|%.6f\t%.6f\t|\n", m->x_basis.x, m->x_basis.y);
+    printf("|%.6f\t%.6f\t|\n", m->y_basis.x, m->y_basis.y);
+}
+
 #ifdef __cplusplus
 }
 #endif

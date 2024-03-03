@@ -267,6 +267,12 @@ int __cdecl vec4_is_equal(cpvec4 v1, cpvec4 v2)
         is_equal(v1->w, v2->w);
 }
 
+void __cdecl vec4_output(cpvec4 v)
+{
+    if (!v) return;
+    printf("{%.6f; %.6f; %.6f; %.6f}\n", v->x, v->y, v->z, v->w);
+}
+
 #ifdef __cplusplus
 }
 #endif

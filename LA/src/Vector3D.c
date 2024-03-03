@@ -268,6 +268,12 @@ int __cdecl vec3_is_equal(cpvec3 v1, cpvec3 v2)
     return is_equal(v1->x, v2->x) && is_equal(v1->y, v2->y) && is_equal(v1->z, v2->z);
 }
 
+void __cdecl vec3_output(cpvec3 v)
+{
+    if (!v) return;
+    printf("{%.6f; %.6f; %.6f}\n", v->x, v->y, v->z);
+}
+
 #ifdef __cplusplus
 }
 #endif

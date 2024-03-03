@@ -70,6 +70,8 @@ void __cdecl mat2_rotate_degrees(pmat2 m, float degrees);
 
 int __cdecl mat2_is_equal(cpmat2 m1, cpmat2 m2);
 
+void __cdecl mat2_output(cpmat2 m);
+
 #ifdef __cplusplus
 }
 #endif

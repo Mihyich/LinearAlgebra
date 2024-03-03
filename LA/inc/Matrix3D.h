@@ -112,6 +112,8 @@ void __cdecl mat3_set_ortho_projection(pmat3 m, float l, float r, float b, float
 
 int __cdecl mat3_is_equal(cpmat3 m1, cpmat3 m2);
 
+void __cdecl mat3_output(cpmat3 m);
+
 #ifdef __cplusplus
 }
 #endif

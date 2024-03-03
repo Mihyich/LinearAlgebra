@@ -105,6 +105,8 @@ void __cdecl mat4_set_rotate_around_point(pmat4 m, cpvec3 axis, cpvec3 point, fl
 
 int __cdecl mat4_is_equal(cpmat4 m1, cpmat4 m2);
 
+void __cdecl mat4_output(cpmat4 m);
+
 #ifdef __cplusplus
 }
 #endif

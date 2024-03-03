@@ -86,6 +86,8 @@ void __cdecl vec4_normalize(pvec4 v);
 
 int __cdecl vec4_is_equal(cpvec4 v1, cpvec4 v2);
 
+void __cdecl vec4_output(cpvec4 v);
+
 #ifdef __cplusplus
 }
 #endif

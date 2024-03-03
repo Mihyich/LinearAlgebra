@@ -82,6 +82,8 @@ void __cdecl vec3_reflect(cpvec3 r, cpvec3 n, pvec3 res);
 
 int __cdecl vec3_is_equal(cpvec3 v1, cpvec3 v2);
 
+void __cdecl vec3_output(cpvec3 v);
+
 #ifdef __cplusplus
 }
 #endif

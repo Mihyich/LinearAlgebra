@@ -415,15 +415,17 @@ void __cdecl mat3_set_rotate_axis(pmat3 m, float x, float y, float z, float rad)
 	const float fsu = 1.f - c;
 
     m->x_basis.x = x * x * fsu + c;
-    m->x_basis.y = x * y * fsu - z * s;
+    m->x_basis.y = -x * y * fsu + z * s;
     m->x_basis.z = x * z * fsu + y * s;
 
-    m->y_basis.x = x * y * fsu + z * s;
+
+    m->y_basis.x = -x * y * fsu - z * s;
     m->y_basis.y = y * y * fsu + c;
-    m->y_basis.z = y * z * fsu - x * s;
+    m->y_basis.z = -y * z * fsu + x * s;
+
 
     m->z_basis.x = x * z * fsu - y * s;
-    m->z_basis.y = y * z * fsu + x * s;
+    m->z_basis.y = -y * z * fsu - x * s;
     m->z_basis.z = z * z * fsu + c;
 }
 
@@ -548,24 +550,8 @@ void __cdecl mat3_rotate_z_degrees(pmat3 m, float degrees)
 
 void __cdecl mat3_rotate_axis(pmat3 m, float x, float y, float z, float rad)
 {
-    const float c = cosf(rad);
-	const float s = sinf(rad);
-	const float fsu = 1.f - c;
-
     mat3 rot;
-
-	rot.x_basis.x = x * x * fsu + c;
-	rot.x_basis.y = x * y * fsu + z * s;
-	rot.x_basis.z = x * z * fsu - y * s;
-
-	rot.y_basis.x = x * y * fsu - z * s;
-	rot.y_basis.y = y * y * fsu + c;
-	rot.y_basis.z = y * z * fsu + x * s;
-
-	rot.z_basis.x = x * z * fsu + y * s;
-	rot.z_basis.y = y * z * fsu - x * s;
-	rot.z_basis.z = z * z * fsu + c;
-
+    mat3_set_rotate_axis(m, x, y, z, rad);
     mat3_compose(m, &rot);
 }
 
@@ -595,6 +581,14 @@ int __cdecl mat3_is_equal(cpmat3 m1, cpmat3 m2)
         vec3_is_equal(&m1->x_basis, &m2->x_basis) &&
         vec3_is_equal(&m1->y_basis, &m2->y_basis) &&
         vec3_is_equal(&m1->z_basis, &m2->z_basis);
+}
+
+void __cdecl mat3_output(cpmat3 m)
+{
+    if (!m) return;
+    printf("|%.6f\t%.6f\t%.6f\t|\n", m->x_basis.x, m->x_basis.y, m->x_basis.z);
+    printf("|%.6f\t%.6f\t%.6f\t|\n", m->y_basis.x, m->y_basis.y, m->y_basis.z);
+    printf("|%.6f\t%.6f\t%.6f\t|\n", m->z_basis.x, m->z_basis.y, m->z_basis.z);
 }
 
 #ifdef __cplusplus
