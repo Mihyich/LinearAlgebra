@@ -52,7 +52,7 @@ LA_OBJ := $(patsubst $(LA_SRC)/%.c,$(OUT)/%.o,$(wildcard $(LA_SRC)/*.c))
 
 # линковка программы (порядок библиотек имеет значение)
 app.exe : $(APP_OBJ) LA.lib
-	$(CCPP) -o $@ $^ -lgdi32
+	$(CCPP) -o $@ $^
 
 # линковка библиотеки LA.lib
 LA.lib : $(LA_OBJ)
